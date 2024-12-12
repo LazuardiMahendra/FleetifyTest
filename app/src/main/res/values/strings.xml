@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">FleetifyTest</string>
+    <string name="tv_main_report_vehicle_complaints">Laporan Keluhan Kendaraan</string>
+    <string name="tv_user_fullname">USER FULLNAME</string>
+    <string name="txt_laporan_keluhan">Laporan Keluhan</string>
+    <string name="txt_userid">UserId</string>
+    <string name="txt_vechilename">vechileName</string>
+    <string name="txt_reportby">reportBy</string>
+    <string name="txt_catatan_keluhan">Catatan Keluhan :</string>
+    <string name="txt_button_add__complaints">Buat Laporan Keluhan Baru</string>
+    <string name="txt_date">Tanggal</string>
+    <string name="txt_complaint_note">Catatan Keluhan</string>
+    <string name="txt_choose_vehicle">Pilih Kendaraan</string>
+    <string name="txt_document_title">Dokumen Laporan</string>
+    <string name="txt_send_report">Kirim Laporan</string>
 </resources>
