@@ -48,6 +48,16 @@ dependencies {
     //Material UI
     implementation(libs.material)
 
+    //Koin
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
 
+    //retrofit, gson
+    implementation(libs.retrofit)
+    implementation(libs.converter.name)
+    implementation(libs.converter.gson)
+
+    //RXJava
+    implementation(libs.rxjava)
 
 }
