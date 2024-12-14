@@ -1,4 +1,4 @@
-package com.example.fleetifytest.core.repository.request;
+package com.example.fleetifytest.core.source.request;
 
 import java.io.File;
 

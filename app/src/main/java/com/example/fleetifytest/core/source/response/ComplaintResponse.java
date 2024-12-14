@@ -1,4 +1,4 @@
-package com.example.fleetifytest.core.repository.response;
+package com.example.fleetifytest.core.source.response;
 
 public class ComplaintResponse {
     private boolean status;

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray_100"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".view.activity.MainActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_main"

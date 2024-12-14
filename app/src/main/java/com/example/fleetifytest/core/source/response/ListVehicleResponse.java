@@ -1,4 +1,4 @@
-package com.example.fleetifytest.core.repository.response;
+package com.example.fleetifytest.core.source.response;
 
 import java.util.List;
 

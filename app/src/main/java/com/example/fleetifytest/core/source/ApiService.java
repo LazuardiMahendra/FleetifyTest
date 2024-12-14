@@ -1,8 +1,8 @@
 package com.example.fleetifytest.core.source;
 
-import com.example.fleetifytest.core.repository.response.ComplaintResponse;
-import com.example.fleetifytest.core.repository.response.ListAllComplaintResponse;
-import com.example.fleetifytest.core.repository.response.ListVehicleResponse;
+import com.example.fleetifytest.core.source.response.ComplaintResponse;
+import com.example.fleetifytest.core.source.response.ListAllComplaintResponse;
+import com.example.fleetifytest.core.source.response.ListVehicleResponse;
 
 import java.util.List;
 
