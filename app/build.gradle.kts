@@ -46,6 +46,11 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    //ViewModel
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.livedata)
+    implementation(libs.androidx.lifecycle.common.java8)
+
     //Material UI
     implementation(libs.material)
 
@@ -59,7 +64,7 @@ dependencies {
 
     //retrofit, gson
     implementation(libs.retrofit)
-    implementation(libs.converter.name)
+//    implementation(libs.converter.name)
     implementation(libs.converter.gson)
     implementation(libs.converter.scalars)
     implementation(libs.logging.interceptor)
@@ -68,5 +73,7 @@ dependencies {
     implementation(libs.rxjava)
     implementation(libs.rxandroid)
     implementation(libs.adapter.rxjava3)
+    implementation(libs.androidx.lifecycle.livedata)
+    implementation(libs.androidx.lifecycle.reactivestreams)
 
 }
