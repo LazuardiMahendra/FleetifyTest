@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray_100"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".view.activity.MainActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_main"
@@ -83,8 +83,9 @@
         android:id="@+id/cv_bottom_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_alignParentBottom="true"
-        android:paddingVertical="20dp">
+        android:paddingVertical="30dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/bt_add_complaint"
@@ -92,6 +93,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="@color/gray_600"
             android:text="@string/txt_button_add__complaints"
             android:textAllCaps="false"

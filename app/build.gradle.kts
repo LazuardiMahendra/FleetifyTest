@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -48,6 +49,24 @@ dependencies {
     //Material UI
     implementation(libs.material)
 
+    //Koin
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
 
+    //Hilt
+    implementation(libs.hilt.android)
+    annotationProcessor(libs.hilt.compiler)
+
+    //retrofit, gson
+    implementation(libs.retrofit)
+    implementation(libs.converter.name)
+    implementation(libs.converter.gson)
+    implementation(libs.converter.scalars)
+    implementation(libs.logging.interceptor)
+
+    //RXJava
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
+    implementation(libs.adapter.rxjava3)
 
 }

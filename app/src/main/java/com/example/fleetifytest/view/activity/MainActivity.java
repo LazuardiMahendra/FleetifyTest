@@ -1,4 +1,4 @@
-package com.example.fleetifytest;
+package com.example.fleetifytest.view.activity;
 
 import android.os.Bundle;
 
