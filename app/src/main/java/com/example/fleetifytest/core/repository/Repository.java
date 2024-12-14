@@ -1,11 +1,15 @@
 package com.example.fleetifytest.core.repository;
 
+import android.annotation.SuppressLint;
+
 import com.example.fleetifytest.core.source.ApiService;
 import com.example.fleetifytest.core.source.response.ComplaintResponse;
 import com.example.fleetifytest.core.source.response.ListAllComplaintResponse;
 import com.example.fleetifytest.core.source.response.ListVehicleResponse;
 
 import java.io.File;
+
+import javax.inject.Inject;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.BackpressureStrategy;
@@ -16,10 +20,12 @@ import io.reactivex.rxjava3.subjects.PublishSubject;
 public class Repository implements DataSource {
     private final ApiService apiService;
 
+    @Inject
     public Repository(ApiService apiService) {
         this.apiService = apiService;
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public Flowable<ListVehicleResponse.Vehicle> getListVehicle() {
         PublishSubject<ListVehicleResponse.Vehicle> result = PublishSubject.create();
