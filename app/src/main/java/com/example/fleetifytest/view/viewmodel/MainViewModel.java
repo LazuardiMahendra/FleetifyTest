@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.ViewModel;
 
 import com.example.fleetifytest.core.repository.MainDataSource;
+import com.example.fleetifytest.core.source.response.ListAllComplaintResponse;
 import com.example.fleetifytest.core.source.response.ListVehicleResponse;
 
 import java.util.List;
@@ -25,5 +26,10 @@ public class MainViewModel extends ViewModel {
 
     public LiveData<List<ListVehicleResponse.Vehicle>> getListVehicle() {
         return LiveDataReactiveStreams.fromPublisher(mainDataSource.getListVehicle().toObservable().toFlowable(BackpressureStrategy.BUFFER));
+    }
+
+
+    public LiveData<List<ListAllComplaintResponse.Complaint>> getAllComplaint(String userId) {
+        return LiveDataReactiveStreams.fromPublisher(mainDataSource.getAllComplaint(userId).toObservable().toFlowable(BackpressureStrategy.BUFFER));
     }
 }

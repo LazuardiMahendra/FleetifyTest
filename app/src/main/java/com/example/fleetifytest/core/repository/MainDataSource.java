@@ -13,7 +13,7 @@ public interface MainDataSource {
 
     Flowable<List<ListVehicleResponse.Vehicle>> getListVehicle();
 
-    Flowable<ListAllComplaintResponse.Complaint> getAllComplaint();
+    Flowable<List<ListAllComplaintResponse.Complaint>> getAllComplaint(String userId);
 
     Flowable<ComplaintResponse> createComplaint(String vehicleId, String note, String userId, File photo);
 

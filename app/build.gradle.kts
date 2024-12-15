@@ -76,4 +76,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata)
     implementation(libs.androidx.lifecycle.reactivestreams)
 
+    //Glide
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
+
 }

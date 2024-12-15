@@ -71,6 +71,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til2"
+        android:visibility="gone"
         style="@style/TextInputLayoutOutlinedBoxDropdownCorner.Position"
         android:layout_width="match_parent"
         android:layout_below="@+id/cv_main"
@@ -87,7 +88,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:visibility="gone"
         android:id="@+id/rv_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

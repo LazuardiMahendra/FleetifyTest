@@ -32,8 +32,10 @@ public class MainRepository implements MainDataSource {
     }
 
     @Override
-    public Flowable<ListAllComplaintResponse.Complaint> getAllComplaint() {
-        return null;
+    public Flowable<List<ListAllComplaintResponse.Complaint>> getAllComplaint(String userId) {
+        PublishSubject<List<ListAllComplaintResponse.Complaint>> result = PublishSubject.create();
+        apiService.getAllComplaint(userId).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).take(1).subscribe(response -> result.onNext(response), throwable -> result.onError(throwable));
+        return result.toFlowable(BackpressureStrategy.BUFFER);
     }
 
     @Override
