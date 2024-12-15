@@ -24,8 +24,6 @@ public class MainViewModel extends ViewModel {
     }
 
     public LiveData<List<ListVehicleResponse.Vehicle>> getListVehicle() {
-        return LiveDataReactiveStreams.fromPublisher(
-                mainDataSource.getListVehicle().toObservable().toFlowable(BackpressureStrategy.BUFFER)
-        );
+        return LiveDataReactiveStreams.fromPublisher(mainDataSource.getListVehicle().toObservable().toFlowable(BackpressureStrategy.BUFFER));
     }
 }
