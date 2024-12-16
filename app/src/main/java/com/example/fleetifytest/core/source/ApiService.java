@@ -13,15 +13,15 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
     @GET(Routing.GET_LIST_VEHICLE)
     Flowable<List<ListVehicleResponse.Vehicle>> getListVehicle();
 
-    @GET(Routing.GET_LIST_VEHICLE)
-    Flowable<List<ListAllComplaintResponse.Complaint>> getAllComplaint(@Path("userId") String userId);
+    @GET(Routing.GET_ALL_LIST_COMPLAINT_REPORT)
+    Flowable<List<ListAllComplaintResponse.Complaint>> getAllComplaint(@Query("userId") String userId);
 
     @Multipart
     @POST(Routing.CREATE_COMPLAINT_URL)
@@ -29,7 +29,7 @@ public interface ApiService {
             @Part("vehicleId") RequestBody vehicleId,
             @Part("note") RequestBody note,
             @Part("userId") RequestBody userId,
-            @Part MultipartBody photo
+            @Part MultipartBody.Part photo
     );
 
 }

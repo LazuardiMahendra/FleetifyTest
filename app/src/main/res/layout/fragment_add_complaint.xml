@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="20dp">
+    android:paddingHorizontal="20dp"
+    android:paddingBottom="20dp"
+    tools:context=".view.AddComplaintDialogFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -19,7 +21,6 @@
         app:startIconDrawable="@drawable/ic_date_range_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -67,6 +68,7 @@
                 android:gravity="top"
                 android:inputType="textMultiLine"
                 android:lines="4"
+                android:maxLines="4"
                 android:textSize="12sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,19 +94,18 @@
 
     <ImageView
         android:id="@+id/iv_photo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_icon"
         android:padding="6dp"
-        android:scaleType="centerCrop"
         android:src="@drawable/ic_image_48"
         app:layout_constraintStart_toStartOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:tint="@color/grey_status" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_photo"
+        android:id="@+id/materialButton"
         style="@style/ShapeAppearanceOverlay.Material3.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,10 +117,11 @@
         app:layout_constraintTop_toTopOf="@+id/iv_photo" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_add_complaint"
+        android:id="@+id/bt_add_complaint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="20dp"
         android:backgroundTint="@color/gray_600"

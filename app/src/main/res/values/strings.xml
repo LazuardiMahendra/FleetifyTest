@@ -13,4 +13,6 @@
     <string name="txt_choose_vehicle">Pilih Kendaraan</string>
     <string name="txt_document_title">Dokumen Laporan</string>
     <string name="txt_send_report">Kirim Laporan</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
