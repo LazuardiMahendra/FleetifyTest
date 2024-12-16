@@ -1,5 +1,7 @@
 package com.example.fleetifytest.core.repository;
 
+import android.util.Log;
+
 import com.example.fleetifytest.core.source.ApiService;
 import com.example.fleetifytest.core.source.response.ComplaintResponse;
 import com.example.fleetifytest.core.source.response.ListAllComplaintResponse;
@@ -47,9 +49,14 @@ public class MainRepository implements MainDataSource {
         RequestBody mainVehicleId = RequestBody.create(vehicleId, MediaType.parse("text/plain"));
         RequestBody mainNote = RequestBody.create(note, MediaType.parse("text/plain"));
         RequestBody mainUserId = RequestBody.create(userId, MediaType.parse("text/plain"));
-        RequestBody photoReqBody = RequestBody.create(photo, MediaType.parse("multipart/form-data"));
+        RequestBody photoReqBody = RequestBody.create(photo, MediaType.parse("image/jpeg"));
         MultipartBody.Part photoPart = MultipartBody.Part.createFormData("image", photo.getName(), photoReqBody);
-        apiService.createComplaint(mainVehicleId, mainNote, mainUserId, photoPart).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).take(1).subscribe(response -> result.onNext(response), throwable -> result.onError(throwable));
+        Flowable<ComplaintResponse> flowable = apiService.createComplaint(mainVehicleId, mainNote, mainUserId, photoPart).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).take(1).onErrorReturn(throwable -> {
+            Log.e("ComplaintError", "Error creating complaint", throwable);
+            return new ComplaintResponse();
+        });
+
+        flowable.subscribe(response -> result.onNext(response), throwable -> result.onError(throwable));
         return result.toFlowable(BackpressureStrategy.BUFFER);
     }
 }

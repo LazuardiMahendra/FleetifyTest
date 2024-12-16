@@ -1,7 +1,10 @@
 package com.example.fleetifytest.view.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.LiveDataReactiveStreams;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.fleetifytest.core.repository.MainDataSource;
@@ -36,6 +39,14 @@ public class MainViewModel extends ViewModel {
     }
 
     public LiveData<ComplaintResponse> createComplaint(String vehicleId, String note, String userId, File photo) {
-        return LiveDataReactiveStreams.fromPublisher(mainDataSource.createComplaint(vehicleId, note, userId, photo).toObservable().toFlowable(BackpressureStrategy.BUFFER));
+        MutableLiveData<ComplaintResponse> result = new MutableLiveData<>();
+        mainDataSource.createComplaint(vehicleId, note, userId, photo)
+                .subscribe(response -> result.setValue(response),
+                        throwable -> {
+                            Log.e("ComplaintError", "Error creating complaint", throwable);
+                            result.setValue(null);  // Atau set status error lainnya
+                        });
+        return result;
     }
+
 }

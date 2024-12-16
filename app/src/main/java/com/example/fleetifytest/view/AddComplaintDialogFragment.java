@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,13 +49,18 @@ public class AddComplaintDialogFragment extends DialogFragment {
     private static final int REQUEST_CAMERA_PERMISSION = 100;
     private static final int REQUEST_IMAGE_CAPTURE = 101;
 
-    private String userId = "P2Ye3WDnbNfpX8y";
 
     private MainViewModel mainViewModel;
 
     private List<String> vehicleList = new ArrayList<>();
 
     private Uri photoUri;
+
+    private String userId = "P2Ye3WDnbNfpX8y";
+    private String vehicleId;
+    private String noteString;
+    private File photoFile;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,8 +78,20 @@ public class AddComplaintDialogFragment extends DialogFragment {
 
         setFormattedDateTime();
         getListVehicle();
-
         binding.btnPhoto.setOnClickListener(v -> showPhotoSelectionDialog());
+
+        binding.btnAddComplaint.setOnClickListener(view -> {
+            String dropdownText = binding.tilDropdown.getEditText() != null ? binding.tilDropdown.getEditText().getText().toString() : "";
+            String note = binding.tilNote.getEditText() != null ? binding.tilNote.getEditText().getText().toString() : "";
+
+            Log.d("TAG", vehicleId + " " + note + " " + userId + " " + photoFile);
+            if (!note.isEmpty() && photoFile != null && !dropdownText.isEmpty()) {
+                createComplaint(vehicleId, note, userId, photoFile);
+            } else {
+                Toast.makeText(getContext(), "Tidak boleh ada yang kosong!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void setFormattedDateTime() {
@@ -90,6 +108,7 @@ public class AddComplaintDialogFragment extends DialogFragment {
         String formattedDateTime = dayOfWeek + ", " + date + " - " + time;
 
         binding.etDate.setText(formattedDateTime);
+
     }
 
     private void showPhotoSelectionDialog() {
@@ -137,6 +156,35 @@ public class AddComplaintDialogFragment extends DialogFragment {
         }
     }
 
+    private String getRealPathFromURI(Uri contentUri) {
+        String result = null;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getActivity().getContentResolver().query(contentUri, proj, null, null, null);
+
+        if (cursor != null) {
+            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            result = cursor.getString(columnIndex);
+            cursor.close();
+        }
+        return result;
+    }
+
+    private File getFileFromUri(Uri uri) {
+        File file = null;
+        try {
+            String path = getRealPathFromURI(uri);
+
+            if (path != null) {
+                file = new File(path);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return file;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -147,7 +195,8 @@ public class AddComplaintDialogFragment extends DialogFragment {
                     try {
                         Bitmap selectedImageBitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), selectedImageUri);
                         binding.ivPhoto.setImageBitmap(selectedImageBitmap);
-                        Log.d("TAG", "VALUE IMAGE : " + selectedImageBitmap + "  =  " + selectedImageUri);
+                        photoFile = getFileFromUri(selectedImageUri);
+                        Log.d("TAG", "VALUE IMAGE : " + selectedImageBitmap + "  =  " + selectedImageUri + "  " + photoFile);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -176,6 +225,7 @@ public class AddComplaintDialogFragment extends DialogFragment {
                     vehicleList.clear();
                     for (ListVehicleResponse.Vehicle vehicle : vehicles) {
                         vehicleList.add(vehicle.getType());
+                        vehicleId = vehicle.getVehicleId().toString();
                     }
                     setVehicleDropdown();
                 }
@@ -194,19 +244,18 @@ public class AddComplaintDialogFragment extends DialogFragment {
 
     private void createComplaint(String vehicleId, String note, String userId, File photo) {
         mainViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-        mainViewModel.createComplaint(vehicleId, note, userId, photo).observe(getViewLifecycleOwner(), new
-                Observer<ComplaintResponse>() {
-                    @Override
-                    public void onChanged(ComplaintResponse complaintResponse) {
-                        if (complaintResponse.isStatus() == true) {
-                            Toast.makeText(getContext(), "Laporan berhasil dibuat", Toast.LENGTH_SHORT).show();
-                            dismiss();
-                        } else {
-                            Toast.makeText(getContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
+        mainViewModel.createComplaint(vehicleId, note, userId, photo).observe(getViewLifecycleOwner(), new Observer<ComplaintResponse>() {
+            @Override
+            public void onChanged(ComplaintResponse complaintResponse) {
+                if (complaintResponse.getStatus() == "true") {
+                    Toast.makeText(getContext(), "Laporan berhasil dibuat", Toast.LENGTH_SHORT).show();
+                    dismiss();
+                } else {
+                    Toast.makeText(getContext(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
 
-                        }
-                    }
-                });
+                }
+            }
+        });
     }
 
     private void requestCameraPermission() {
