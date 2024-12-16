@@ -1,14 +1,19 @@
 package com.example.fleetifytest.core.source.response;
 
 public class ComplaintResponse {
-    private boolean status;
+    private String status;
     private String message;
 
-    public boolean isStatus() {
+    public ComplaintResponse() {
+        this.status = status;
+        this.message = message;
+    }
+
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
