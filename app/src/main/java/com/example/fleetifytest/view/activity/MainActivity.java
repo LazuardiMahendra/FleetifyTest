@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fleetifytest.core.source.response.ListAllComplaintResponse;
 import com.example.fleetifytest.databinding.ActivityMainBinding;
+import com.example.fleetifytest.view.AddComplaintDialogFragment;
 import com.example.fleetifytest.view.adapter.ComplaintAdapter;
 import com.example.fleetifytest.view.viewmodel.MainViewModel;
 
@@ -49,20 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-//
 
-//
-//
-//        ArrayAdapter<String> adapterType = new ArrayAdapter<>(
-//                this, R.layout.item_list_text_dropdown, typeNameList
-//        );
-//
-//        AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) binding.til2.getEditText();
-//        if (autoCompleteTextView != null) {
-//            autoCompleteTextView.setAdapter(adapterType);
-//        }
-//
-//    }
-
+        binding.btAddComplaint.setOnClickListener(v -> {
+            AddComplaintDialogFragment addComplaintDialogFragment = new AddComplaintDialogFragment();
+            addComplaintDialogFragment.show(getSupportFragmentManager(), "AddComplaintDialog");
+        });
     }
 }

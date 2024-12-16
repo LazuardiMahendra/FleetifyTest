@@ -15,6 +15,9 @@ import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.subjects.PublishSubject;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class MainRepository implements MainDataSource {
     private final ApiService apiService;
@@ -40,6 +43,13 @@ public class MainRepository implements MainDataSource {
 
     @Override
     public Flowable<ComplaintResponse> createComplaint(String vehicleId, String note, String userId, File photo) {
-        return null;
+        PublishSubject<ComplaintResponse> result = PublishSubject.create();
+        RequestBody mainVehicleId = RequestBody.create(vehicleId, MediaType.parse("text/plain"));
+        RequestBody mainNote = RequestBody.create(note, MediaType.parse("text/plain"));
+        RequestBody mainUserId = RequestBody.create(userId, MediaType.parse("text/plain"));
+        RequestBody photoReqBody = RequestBody.create(photo, MediaType.parse("multipart/form-data"));
+        MultipartBody.Part photoPart = MultipartBody.Part.createFormData("image", photo.getName(), photoReqBody);
+        apiService.createComplaint(mainVehicleId, mainNote, mainUserId, photoPart).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).take(1).subscribe(response -> result.onNext(response), throwable -> result.onError(throwable));
+        return result.toFlowable(BackpressureStrategy.BUFFER);
     }
 }

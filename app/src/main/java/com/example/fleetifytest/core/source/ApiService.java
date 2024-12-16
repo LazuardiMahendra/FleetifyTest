@@ -29,7 +29,7 @@ public interface ApiService {
             @Part("vehicleId") RequestBody vehicleId,
             @Part("note") RequestBody note,
             @Part("userId") RequestBody userId,
-            @Part MultipartBody photo
+            @Part MultipartBody.Part photo
     );
 
 }

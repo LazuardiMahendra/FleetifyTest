@@ -19,13 +19,14 @@
         app:startIconDrawable="@drawable/ic_date_range_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
+        android:id="@+id/til_dropdown"
         style="@style/TextInputLayoutOutlinedBoxDropdownCorner.Position"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +46,7 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/til_dropdown"
         tools:layout_editor_absoluteX="20dp">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -91,18 +92,19 @@
 
     <ImageView
         android:id="@+id/iv_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_icon"
         android:padding="6dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_image_48"
         app:layout_constraintStart_toStartOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:tint="@color/grey_status" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton"
+        android:id="@+id/btn_photo"
         style="@style/ShapeAppearanceOverlay.Material3.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -114,7 +116,7 @@
         app:layout_constraintTop_toTopOf="@+id/iv_photo" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bt_add_complaint"
+        android:id="@+id/btn_add_complaint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

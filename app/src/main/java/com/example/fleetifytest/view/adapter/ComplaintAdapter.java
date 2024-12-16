@@ -45,6 +45,9 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.Comp
                 .load(complaint.getPhoto())
                 .centerCrop()
                 .into(holder.photo);
+
+
+
     }
 
     @Override
